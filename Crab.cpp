@@ -13,8 +13,8 @@ void app::Begin(void)
 	agk::SetVirtualResolution (1024, 768);
 	background = agk::LoadSprite("media/beach.jpg");
 	crab = agk::LoadSprite("media/crab.png");
+	worm = agk::LoadImage("media/worm.png");
 
-	//agk::SetClearColor( 151,170,204 ); // light blue
 	agk::SetSyncRate(60,0);
 	agk::SetScissor(0,0,0,0);
 
@@ -38,6 +38,25 @@ int app::Loop (void)
 	if (agk::GetRawKeyState(AGK_KEY_D)) {
 		player_x += move_this_frame;
 	}
+	
+	float const min_x = agk::GetSpriteWidth(crab) / 2.0f;
+	float const min_y = agk::GetSpriteHeight(crab) / 2.0f;
+	float const max_x = agk::GetVirtualWidth() - min_x;
+	float const max_y = agk::GetVirtualHeight() - min_y;
+
+	if (player_x < min_x) {
+		player_x = min_x;
+	}
+	else if (player_x > max_x) {
+		player_x = max_x;
+	}
+	if (player_y < min_y) {
+		player_y = min_y;
+	}
+	else if (player_y > max_y) {
+		player_y = max_y;
+	}
+
 	agk::SetSpritePositionByOffset(crab, player_x, player_y);
 	agk::Sync();
 

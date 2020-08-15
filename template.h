@@ -16,8 +16,12 @@
 // Global values for the app
 class app
 {
+	//ID numbers of sprites
 	unsigned int background;
-	unsigned int crab;
+	unsigned int crab;	
+	unsigned int worm;
+	unsigned int worms[10];
+
 	float player_x, player_y;
 	static float const PLAYER_SPEED;
 
