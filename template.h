@@ -21,6 +21,7 @@ class app
 	unsigned int crab;	
 	unsigned int worm;
 	unsigned int worms[10];
+	class Score* score;
 
 	float player_x, player_y;
 	static float const PLAYER_SPEED;

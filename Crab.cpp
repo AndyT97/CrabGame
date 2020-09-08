@@ -1,5 +1,6 @@
 // Includes
 #include "template.h"
+#include "Score.h"
 
 // Namespace
 using namespace AGK;
@@ -27,6 +28,9 @@ void app::Begin(void)
 	player_x = agk::GetVirtualWidth() / 2.0f;
 	player_y = agk::GetVirtualHeight() / 2.0f;
 
+	unsigned int font = agk::LoadFont("media/kongtext.ttf");
+	score = new Score(font, agk::GetVirtualWidth() * 0.2f);
+
 }
 
 int app::Loop (void)
@@ -35,6 +39,7 @@ int app::Loop (void)
 	//TODO pick better numbers
 	int newXpos = rand() % 900 + 100;
 	int newYpos = rand() % 500 + 200;
+
 
 	float const move_this_frame = PLAYER_SPEED * agk::GetFrameTime();
 	if (agk::GetRawKeyState(AGK_KEY_W)) {
@@ -71,6 +76,7 @@ int app::Loop (void)
 	if (agk::GetSpriteCollision(crab, worm)) {
 		//agk::SetSpriteColor(worm, 255, 0, 0,255);
 		agk::SetSpritePosition(worm, newXpos, newYpos);
+		score->add_point();
 	}
 
 	agk::SetSpritePositionByOffset(crab, player_x, player_y);
